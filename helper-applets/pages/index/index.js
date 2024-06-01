@@ -8,7 +8,6 @@ Component({
       avatarUrl: defaultAvatarUrl,
       nickName: '',
     },
-    buttons: [{text: '取消'}, {text: '确认'}],
     hasUserInfo: false,
     canIUseGetUserProfile: wx.canIUse('getUserProfile'),
     canIUseNicknameComp: wx.canIUse('input.type.nickname'),
