@@ -1,0 +1,4 @@
+/* pages/home/home.wxss */
+.weui-agree .weui-agree__text {
+  display: inline;
+}

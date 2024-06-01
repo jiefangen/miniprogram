@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+
 .container {
   height: 100%;
   display: flex;
@@ -8,3 +10,26 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+page {
+  height: 100%;
+}
+
+navigator text,
+text text,
+text navigator {
+  display: inline;
+}
+
+image {
+  align-self: flex-start;
+}
+
+.wx-scroll-view-flex:is(div):not(.wx-scroll-view-flex) {
+  width: auto !important;
+}
+
+/* scroll-view 设置个高度 */
+.page-scroll-view {
+  height: 90vh;
+}

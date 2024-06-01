@@ -1,0 +1,14 @@
+{
+  "name": "helper-applets",
+  "version": "1.0.0",
+  "description": "雨竹小助手",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JieFangen",
+  "license": "ISC",
+  "dependencies": {
+    "weui-miniprogram": "^1.3.1"
+  }
+}
