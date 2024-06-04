@@ -1,0 +1,36 @@
+<navigation-bar title="我的" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<view class="mine-container">
+  <view class="profile-header">
+    <image src="{{avatarUrl}}" class="avatar"></image>
+    <view class="username">{{username}}</view>
+    <view class="email">{{email}}</view>
+  </view>
+
+  <view class="weui-cells__title">个人信息</view>
+  <view class="weui-cells">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>昵称</text>
+      </view>
+      <view class="weui-cell__ft">{{username}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>手机号码</text>
+      </view>
+      <view class="weui-cell__ft">{{phone}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>邮箱</text>
+      </view>
+      <view class="weui-cell__ft">{{email}}</view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button class="weui-btn weui-btn_warn">退出登录</button>
+  </view>
+</view>
+
+
