@@ -1,4 +1,6 @@
+import CustomPage from '../../utils/base/CustomPage'
 
-Component({
-  
+CustomPage({
+  data: {
+  }
 })

@@ -25,10 +25,6 @@ page {
   border-radius: 50%;
 }
 
-.usermotto {
-  margin-top: 200px;
-}
-
 .avatar-wrapper {
   padding: 0;
   width: 56px !important;
@@ -59,4 +55,10 @@ page {
 
 .nickname-input {
   flex: 1;
+}
+
+.button-sp-area{
+  margin: 0 auto;
+  padding-top: 15px;
+  text-align: center;
 }

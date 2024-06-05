@@ -6,31 +6,45 @@
     <view class="email">{{email}}</view>
   </view>
 
-  <view class="weui-cells__title">个人信息</view>
-  <view class="weui-cells">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">
-        <text>昵称</text>
+  <view wx:if="{{isLoggedIn}}">
+    <view class="weui-cells">
+      <view class="weui-cell weui-cell_access" bindtap="navigateToSettings">
+        <view class="weui-cell__bd">
+          <text>设置</text>
+        </view>
+        <view class="weui-cell__ft"></view>
       </view>
-      <view class="weui-cell__ft">{{username}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">
-        <text>手机号码</text>
+      <view class="weui-cell weui-cell_access" bindtap="navigateToHelp">
+        <view class="weui-cell__bd">
+          <text>帮助与反馈</text>
+        </view>
+        <view class="weui-cell__ft"></view>
       </view>
-      <view class="weui-cell__ft">{{phone}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">
-        <text>邮箱</text>
+      <view class="weui-cell weui-cell_access" bindtap="navigateToClearCache">
+        <view class="weui-cell__bd">
+          <text>清除缓存</text>
+        </view>
+        <view class="weui-cell__ft"></view>
       </view>
-      <view class="weui-cell__ft">{{email}}</view>
+      <view class="weui-cell weui-cell_access" bindtap="navigateToLogs">
+        <view class="weui-cell__bd">
+          <text>启动日志</text>
+        </view>
+        <view class="weui-cell__ft"></view>
+      </view>
     </view>
-  </view>
-
-  <view class="weui-btn-area">
-    <button class="weui-btn weui-btn_warn">退出登录</button>
   </view>
 </view>
 
+<view class="weui-btn-area">
+  <view wx:if="{{isLoggedIn}}">
+    <button class="weui-btn weui-btn_warn logout" bindtap="logout">退出登录</button>
+  </view>
+  <view wx:else>
+    <button class="weui-btn weui-btn_primary" bindtap="navigateToLogin">登录</button>
+  </view>
+</view>
 
+<mp-dialog title="退出" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <view>是否要退出登录？</view>
+</mp-dialog>
