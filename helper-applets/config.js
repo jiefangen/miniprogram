@@ -28,6 +28,6 @@ module.exports = {
   CACHE_TOKEN: 'TOKEN',
   //token获取时间戳
   CACHE_TOKEN_TIME: 'CACHE_TOKEN_TIME',
-  //token有效时间，23小时
+  //token有效时间，
   TOKEN_EFFECTIVE_TIME: 82800000,
 }

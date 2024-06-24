@@ -7,13 +7,9 @@
   line-height: 450rpx;
 }
 .avatar-img {
-  width: 120rpx;
-  height: 120rpx;
-}
-.avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 .content {
   margin-left: 50rpx;
@@ -28,4 +24,22 @@
   border-radius: 80rpx;
   margin: 70rpx 50rpx;
   font-size: 35rpx;
+}
+.nickname {
+  margin: 90rpx 0 90rpx 50rpx;
+  display: flex;
+  flex-direction: column;
+  color: #aaa;
+  width: 80%;
+  font-size: 32rpx;
+}
+.upgrade-tip {
+  color: #333; /* 文本颜色 */
+  padding: 15px 25px; /* 内边距 */
+  font-size: 18px; /* 字体大小 */
+  line-height: 1.5; /* 行高 */
+  text-align: center; /* 文本居中 */
+  font-family: 'Arial', sans-serif; /* 字体 */
+  border-radius: 8px; /* 圆角 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影 */
 }

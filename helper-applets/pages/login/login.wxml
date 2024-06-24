@@ -1,17 +1,23 @@
-<navigation-bar title="登录授权" back="{{true}}" color="black" background="#FFF"></navigation-bar>
-<!-- 只展示用户头像昵称，可以使用 <open-data /> 组件 -->
-<open-data type="userAvatarUrl"></open-data>
-<open-data type="userNickName"></open-data>
-<view wx:if="{{canIUse}}">
+<navigation-bar title="登录" back="{{!hasUserInfo}}" color="black" background="#FFF"></navigation-bar>
+<view class="userinfo">
   <view class='header'>
-      <image class="avatar" src='{{avatarUrl}}'></image>
+    <image class="avatar-img" src='{{userInfo.avatarUrl}}'></image>
   </view>
-  <view class='content'>
+  <block wx:if="{{canIUseGetUserProfile && !hasUserInfo}}">
+    <view class='content'>
       <view>申请获取以下权限</view>
-      <text>获得你的公开信息(昵称，头像等)</text>
-  </view>
-  <button class='bottom' type='primary' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
-      微信授权登录
-  </button>
+      <text>获得你的公开信息（昵称，头像）</text>
+    </view>
+    <button class='bottom' type='primary' bindtap="bindAuthLogin">
+      微信一键登录
+    </button>
+  </block>
+  <block wx:elif="{{hasUserInfo}}">
+    <text class="nickname">{{userInfo.nickName}}</text>
+  </block>
+  <block wx:else>
+    <view class="container">
+      <view class="upgrade-tip">请升级微信版本</view>
+    </view>
+  </block>
 </view>
-<view wx:else>请升级微信版本</view>
