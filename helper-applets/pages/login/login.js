@@ -38,7 +38,7 @@ CustomPage({
           wx.setStorageSync(CACHE_USERINFO, JSON.stringify(res.userInfo))
         }
         // 登录注册逻辑
-        authLogin(this, )
+        authLogin(this)
         wx.showToast({
           icon: "none",
           title: '登录成功',

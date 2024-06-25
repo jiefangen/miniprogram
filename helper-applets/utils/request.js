@@ -28,11 +28,12 @@ export default function request(api, method, data, {
       header: header,
       data: data || {},
       success: (res) => {
-        if (res.statusCode === 401) {
+      // 4014: Illegal token; 4018: Token expired;
+      if (res.code === 4014 || res.code === 4018 || res.code === 5006 || res.code === 5012) {
           wx.removeStorageSync(CACHE_TOKEN)
           wx.showToast({
             type: "loading",
-            title: '超出登录有效期，重新获取中...',
+            title: '登录凭证已失效，请重新获取。。。',
           })
           wx.switchTab({
             url: '/pages/index/index',

@@ -77,6 +77,8 @@ async function authMain(instance, userInfo) {
     })
     return
   }
-  //用户名和手机号码都不为空证明已经授权过了
-  //这里可以调用首页需要的 api
+  //这里可以调用首页需要的api并跳转到首页
+  wx.switchTab({
+    url: '/pages/index/index',
+  })
 }
