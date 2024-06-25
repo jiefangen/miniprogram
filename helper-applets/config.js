@@ -12,9 +12,12 @@ module.exports = {
 
   // 请求头
   HEADER: {
-    'content-type': 'application/json'
+    'content-type': 'application/json',
+    'app-source': 'WECHAT-MINI'
   },
-  // 回话密钥名称 
+  // 小程序appid
+  APP_ID: 'APPID',
+// 回话密钥名称 
   TOKENNAME: 'Authorization',
   //用户信息缓存名称
   CACHE_USERINFO: 'USERINFO',
@@ -23,11 +26,11 @@ module.exports = {
   //code获取时间戳
   CACHE_CODE_TIME: "CODETIME",
   //微信官方称code有效时间为五分钟，保险起见设置4.5分钟
-  CODE_EFFECTIVE_TIME: 45000,
+  CODE_EFFECTIVE_TIME: 270000,
   //token缓存名称
   CACHE_TOKEN: 'TOKEN',
   //token获取时间戳
   CACHE_TOKEN_TIME: 'CACHE_TOKEN_TIME',
-  //token有效时间，
+  //token有效时间，23小时
   TOKEN_EFFECTIVE_TIME: 82800000,
 }

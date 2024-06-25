@@ -1,4 +1,4 @@
-<navigation-bar title="登录" back="{{!hasUserInfo}}" color="black" background="#FFF"></navigation-bar>
+<navigation-bar title="微信登录" back="{{true}}" color="black" background="#FFF"></navigation-bar>
 <view class="userinfo">
   <view class='header'>
     <image class="avatar-img" src='{{userInfo.avatarUrl}}'></image>
