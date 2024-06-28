@@ -17,12 +17,12 @@ module.exports = {
   },
   // 小程序appid
   APP_ID: 'APPID',
-// 回话密钥名称 
+  // 回话密钥名称 
   TOKENNAME: 'Authorization',
   //用户信息缓存名称
   CACHE_USERINFO: 'USERINFO',
   //code
-  CACHE_CODE: "CODE",
+  CACHE_CODE: 'CODE',
   //code获取时间戳
   CACHE_CODE_TIME: "CODETIME",
   //微信官方称code有效时间为五分钟，保险起见设置4.5分钟
@@ -31,6 +31,8 @@ module.exports = {
   CACHE_TOKEN: 'TOKEN',
   //token获取时间戳
   CACHE_TOKEN_TIME: 'CACHE_TOKEN_TIME',
-  //token有效时间，23小时
+  //token有效时间，默认23小时
   TOKEN_EFFECTIVE_TIME: 82800000,
+  // 服务器返回的token失效时间间隔
+  CACHE_TOKEN_EXPIRED_INTERVAL: 'CACHE_TOKEN_EXPIRED_INTERVAL'
 }

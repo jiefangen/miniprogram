@@ -1,7 +1,7 @@
 <navigation-bar title="微信登录" back="{{true}}" color="black" background="#FFF"></navigation-bar>
 <view class="userinfo">
   <view class='header'>
-    <image class="avatar-img" src='{{userInfo.avatarUrl}}'></image>
+    <image class="avatar-img" src='{{userProfile.avatarUrl}}'></image>
   </view>
   <block wx:if="{{canIUseGetUserProfile && !hasUserInfo}}">
     <view class='content'>
@@ -13,7 +13,7 @@
     </button>
   </block>
   <block wx:elif="{{hasUserInfo}}">
-    <text class="nickname">{{userInfo.nickName}}</text>
+    <text class="nickname">{{userInfo.nickname}}（{{userInfo.userId}}-{{userInfo.username}}）</text>
   </block>
   <block wx:else>
     <view class="container">
@@ -21,3 +21,5 @@
     </view>
   </block>
 </view>
+
+<authorize type="{{authType}}" showAuth="{{showAuth}}" />

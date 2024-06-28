@@ -5,7 +5,7 @@
     "pages/home/home",
     "pages/mine/mine",
     "pages/logs/logs"
-  ],
+],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"

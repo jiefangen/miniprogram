@@ -12,15 +12,20 @@ import {
 
 CustomPage({
   data: {
-    userInfo: {
+    userProfile: {
       avatarUrl: defaultAvatarUrl,
       username: '',
       nickName: ''
     },
+    userInfo: {},
     hasUserInfo: false,
+    authSuccess: false,
     // 判断获取微信用户信息组件等是否在当前版本可用
     canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname')
+    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    // 判断微信授权弹窗
+    authType: 'UserInfo',
+    showAuth: true
   },
   onLoad: function () {
   },
@@ -28,22 +33,21 @@ CustomPage({
     wx.getUserProfile({
       desc: '用于完善用户信息',
       success: (res) => {
-        console.log(res) // 日志打印
-        this.setData({
-          hasUserInfo: true,
-          userInfo: res.userInfo
-        })
-        const userInfo = wx.getStorageSync(CACHE_USERINFO)
-        if (!userInfo) { // 只有首次登录的时候才会预缓存用户信息
-          wx.setStorageSync(CACHE_USERINFO, JSON.stringify(res.userInfo))
+        console.log(res) // 微信授权用户信息日志打印
+        let loginParam = {
+          avatar: res.userInfo.avatarUrl,
+          nickname: res.userInfo.nickName
         }
-        // 登录注册逻辑
-        authLogin(this)
-        wx.showToast({
-          icon: "none",
-          title: '登录成功',
-          duration: 1000
-        })
+        // 执行登录注册逻辑
+        authLogin(this, loginParam)
+        // 授权成功弹出登录成功提示
+        if (this.data.authSuccess) {
+          wx.showToast({
+            icon: "none",
+            title: '登录成功',
+            duration: 2000
+          })
+        }
       }
     })
   }

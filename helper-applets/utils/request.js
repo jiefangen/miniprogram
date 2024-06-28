@@ -33,10 +33,10 @@ export default function request(api, method, data, {
           wx.removeStorageSync(CACHE_TOKEN)
           wx.showToast({
             type: "loading",
-            title: '登录凭证已失效，请重新获取。。。',
+            title: '登录凭证已失效，请重新登录。。。',
           })
           wx.switchTab({
-            url: '/pages/index/index',
+            url: '/pages/login/login',
           })
           reject(null);
         }
