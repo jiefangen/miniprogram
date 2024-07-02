@@ -8,7 +8,7 @@
       <view>申请获取以下权限</view>
       <text>获得你的公开信息（昵称，头像）</text>
     </view>
-    <button class='bottom' type='primary' bindtap="bindAuthLogin">
+    <button class='bottom' type='primary' bindtap="bindAuthLogin" loading="{{loading}}">
       微信一键登录
     </button>
   </block>
@@ -21,5 +21,3 @@
     </view>
   </block>
 </view>
-
-<authorize type="{{authType}}" showAuth="{{showAuth}}" />

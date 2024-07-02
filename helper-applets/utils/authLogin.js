@@ -82,13 +82,11 @@ async function loginMain(loginParam, code) {
     appid: appId,
     code: code,
     username: loginParam.username,
-    avatar: loginParam.avatarUrl,
+    avatar: loginParam.avatar,
     nickname: loginParam.nickname,
-    encryptedData: loginParam.encryptedData,
-    iv: loginParam.iv
+    encryptedData: loginParam.encryptedData
   }
   const loginRes = await login(data)
-  // console.log(loginRes)
 
   wx.setStorageSync(APP_ID, appId) 
   wx.setStorageSync(CACHE_TOKEN, loginRes.data.token)

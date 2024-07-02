@@ -2,34 +2,43 @@ import CustomPage from '../../utils/base/CustomPage'
 
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
 
+import {
+  CACHE_USERINFO
+} from "../../config.js"
+
 CustomPage({
   data: {
     isLoggedIn: false,  // 用于区分是否登录
-    username: '未登录',
-    email: 'nologin@example.com',
+    nickname: '未登录',
+    username: 'unknown',
     avatarUrl: defaultAvatarUrl, // 默认头像
     dialogShow: false,
-    buttons: [{ text: '取消' }, { text: '确定' }]
+    buttons: [{ text: '取消' }, { text: '确定' }],
+    // 判断微信授权弹窗
+    authType: 'UserInfo',
+    showAuth: false
   },
   onLoad: function () {
     // 页面加载时检查登录状态
-    // 可以在这里添加实际获取用户信息的逻辑
-    const loggedIn = this.checkLoginStatus();
-    if (loggedIn) {
-      this.setData({
-        isLoggedIn: true,
-        username: '雨竹',
-        avatarUrl: defaultAvatarUrl // 示例用户头像
-      });
-    } else {
-      this.setData({
-        isLoggedIn: false
-      });
-    }
+    this.checkLoginStatus();
   },
   checkLoginStatus: function() {
     // 从存储或服务端获取登录状态
-    return true;
+    const cacheUserInfo = wx.getStorageSync(CACHE_USERINFO)
+    if (cacheUserInfo) {
+      let userInfo = JSON.parse(cacheUserInfo)
+      this.setData({
+        isLoggedIn: true,
+        username: userInfo.username,
+        nickname: userInfo.nickname,
+        avatarUrl: userInfo.avatar
+      });
+    } else {
+      this.setData({
+        showAuth: true, // 缓存中没有用户信息则弹出授权登录窗
+        isLoggedIn: false
+      });
+    }
   },
   navigateToLogin: function() {
     wx.navigateTo({
@@ -67,7 +76,8 @@ CustomPage({
         dialogShow: false,
         showOneButtonDialog: false,
         isLoggedIn: false,
-        username: '未登录',
+        nickname: '未登录',
+        username: 'unknown',
         avatarUrl: defaultAvatarUrl // 重置为默认头像
     })
   },

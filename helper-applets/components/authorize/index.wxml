@@ -1,10 +1,10 @@
 <mp-dialog title="请授权以下信息以继续" show="{{ showAuth }}">
   <view class="tips-content">
-    <button plain icon="wechat" type="primary" class="auth-btn"
+    <button icon="wechat" type="primary" class="auth-btn" loading="{{loading}}"
       bindtap="bindAuthLogin" wx:if="{{type==='UserInfo'}}">
       微信授权登录
     </button>
-    <button plain icon="phone-o" type="primary"  class="auth-btn"
+    <button icon="phone-o" type="primary" class="auth-btn" loading="{{loading}}"
       open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber" wx:else>
       获取手机号进行绑定
     </button>

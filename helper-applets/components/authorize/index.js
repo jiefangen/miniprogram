@@ -5,6 +5,10 @@ import {
 import {
   authLogin
 } from "../../utils/authLogin.js"
+const {
+  getUserInfo,
+  updateUser
+} = require("../../api/user")
 Component({
   properties: {
     type: {
@@ -27,6 +31,9 @@ Component({
   lifetimes: {},
   methods: {
     bindAuthLogin: function () {
+      this.setData({
+        loading: true
+      })
       wx.getUserProfile({
         desc: '用于完善用户信息',
         success: async (res) => {
@@ -34,30 +41,26 @@ Component({
           let loginParam = {
             avatar: res.userInfo.avatarUrl,
             nickname: res.userInfo.nickName,
-            encryptedData: res.encryptedData,
-            iv: res.iv
+            encryptedData: {
+              encryptedData: res.encryptedData,
+              iv: res.iv
+            }
           }
           // 执行登录注册逻辑
           const authLoginRes = await authLogin(this, loginParam)
           // 授权登录成功进行下一步
           if (authLoginRes && this.data.authSuccess) {
-            // 根据微信获得的授权信息更新
-            // let param = {
-            //   encryptedData: res.encryptedData,
-            //   iv: res.iv,
-            //   signature: res.signature,
-            //   rawData: res.rawData
-            // }
-            // 调用更新接口
-            // let updateRes = await this.update(updateUserInfo, param)
-            // if (!updateRes) {
-            //   return
-            // }
-            // 弹出手机号码授权窗口
-            this.setData({
-              showAuth: "PhoneNumber",
-              type: true,
-            })
+            let userInfo = getApp().globalData.userInfo
+            if (!userInfo.phone) { // 缓存用户中没有手机号
+              // 弹出手机号码授权窗口
+              this.setData({
+                showAuth: "PhoneNumber",
+                type: true,
+                loading: false
+              })
+            } else {
+              this.hide()
+            }
           }
         },
         fail(res) {
@@ -65,19 +68,31 @@ Component({
         }
       })
     },
+
     async getPhoneNumber(e) {
+      this.setData({
+        loading: true
+      })
       if (e.detail.errMsg === "getPhoneNumber:ok") {
         console.log(e)
-        // 组装用户更新参数
+        // 组装更新加密参数
         const param = {
-          encryptedData: e.detail.encryptedData,
-          iv: e.detail.iv
+          userId: this.data.userInfo.userId,
+          encryptedData: {
+            encryptedData: e.detail.encryptedData,
+            iv: e.detail.iv
+          }
         }
         // 调用更新接口
-        // let updateRes = await this.update(updatePhone, param)
-        // if (!updateRes) {
-        //   return
-        // }
+        let updateRes = await this.update(param)
+        if (updateRes && updateRes.code == 2000) {
+          // 更新本地保存userInfo数据
+          let userInfoRes = await getUserInfo()
+          getApp().globalData.userInfo = userInfoRes.data || {}
+          wx.setStorageSync(CACHE_USERINFO, JSON.stringify(userInfoRes.data))
+        } else {
+          return
+        }
         //关闭隐藏接口
         this.hide()
       }
@@ -87,18 +102,14 @@ Component({
     },
     hide() {
       this.setData({
-        showAuth: false
-      })
-    },
-    //更新用户信息
-    async update(updateApi, param) {
-      this.setData({
-        loading: true
-      })
-      let updateRes = await updateApi(param)
-      this.setData({
+        showAuth: false,
         loading: false
       })
+    },
+
+    // 更新用户信息
+    async update(param) {
+      let updateRes = await updateUser(param)
       if (updateRes.code !== 2000) {
         wx.showToast({
           icon: "error",
@@ -106,9 +117,6 @@ Component({
         })
         return false
       }
-      //更新本地保存 userInfo 数据
-      getApp().globalData.userInfo = updateRes.result || {}
-      wx.setStorageSync(CACHE_USERINFO, JSON.stringify(updateRes.result))
       return updateRes
     }
   }

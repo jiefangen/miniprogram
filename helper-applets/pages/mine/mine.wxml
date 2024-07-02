@@ -1,9 +1,9 @@
-<navigation-bar title="我的" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<navigation-bar title="我的" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <view class="mine-container">
   <view class="profile-header">
     <image src="{{avatarUrl}}" class="avatar"></image>
-    <view class="username">{{username}}</view>
-    <view class="email">{{email}}</view>
+    <view class="nickname">{{nickname}}</view>
+    <view class="username">账户名：{{username}}</view>
   </view>
 
   <view wx:if="{{isLoggedIn}}">
@@ -48,3 +48,5 @@
 <mp-dialog title="退出" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
   <view>是否要退出登录？</view>
 </mp-dialog>
+
+<authorize type="{{authType}}" showAuth="{{showAuth}}" />

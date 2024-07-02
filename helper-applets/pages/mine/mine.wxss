@@ -23,13 +23,13 @@
   border: 2px solid #eee;
 }
 
-.username {
+.nickname {
   font-size: 20px;
   font-weight: bold;
   color: #333;
 }
 
-.email {
+.username {
   font-size: 16px;
   color: #888;
 }

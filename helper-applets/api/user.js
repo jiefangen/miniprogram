@@ -8,6 +8,11 @@ export function login(data) {
 }
 
 // 获取用户信息
-export function getUserInfo(data) {
-  return request.post("/app/user/info", data);
+export function getUserInfo() {
+  return request.get("/app/user/info");
+}
+
+// 更信用户信息
+export function updateUser(data) {
+  return request.post("/app/user/update", data);
 }

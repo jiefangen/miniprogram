@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "authorize": "/components/authorize/index",
     "mp-dialog": "/miniprogram_npm/weui-miniprogram/dialog/dialog"
   }
 }
