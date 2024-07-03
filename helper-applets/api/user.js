@@ -16,3 +16,8 @@ export function getUserInfo() {
 export function updateUser(data) {
   return request.post("/app/user/update", data);
 }
+
+// 用户登出
+export function logout() {
+  return request.get("/app/logout");
+}

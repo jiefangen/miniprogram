@@ -64,11 +64,11 @@ async function wxLogin() {
         if (res.code) {
           resolve(res.code);
         } else {
-          reject(new Error('微信登录失败！' + res.errMsg));
+          reject(new Error('微信登录失败' + res.errMsg));
         }
       },
       fail: (err) => {
-        reject(new Error('微信登录失败！' + err.errMsg));
+        reject(new Error('微信登录失败' + err.errMsg));
       }
     });
   });
@@ -87,17 +87,19 @@ async function loginMain(loginParam, code) {
     encryptedData: loginParam.encryptedData
   }
   const loginRes = await login(data)
-
-  wx.setStorageSync(APP_ID, appId) 
-  wx.setStorageSync(CACHE_TOKEN, loginRes.data.token)
-  wx.setStorageSync(CACHE_TOKEN_EXPIRED_INTERVAL, loginRes.data.tokenEffectiveTime)
-  wx.setStorageSync(CACHE_TOKEN_TIME, (new Date()).getTime())
-  wx.setStorageSync(CACHE_CODE, code)
-  wx.setStorageSync(CACHE_CODE_TIME, (new Date()).getTime())
-  wx.setStorageSync(CACHE_USERINFO, JSON.stringify(loginRes.data))
-  const globalData = getApp().globalData
-  globalData.userInfo = loginRes.data || {}
-  return loginRes
+  if (loginRes.success) {
+    wx.setStorageSync(APP_ID, appId) 
+    wx.setStorageSync(CACHE_TOKEN, loginRes.data.token)
+    wx.setStorageSync(CACHE_TOKEN_EXPIRED_INTERVAL, loginRes.data.tokenEffectiveTime)
+    wx.setStorageSync(CACHE_TOKEN_TIME, (new Date()).getTime())
+    wx.setStorageSync(CACHE_CODE, code)
+    wx.setStorageSync(CACHE_CODE_TIME, (new Date()).getTime())
+    wx.setStorageSync(CACHE_USERINFO, JSON.stringify(loginRes.data))
+    const globalData = getApp().globalData
+    globalData.userInfo = loginRes.data || {}
+    return loginRes
+  }
+  return {}
 }
 
 async function authMain(instance, userInfo) {
@@ -106,8 +108,11 @@ async function authMain(instance, userInfo) {
     instance.setData({
       authSuccess: true,
       hasUserInfo: true,
+      showAuth: false,
       userInfo: userInfo
     })
+  } else {
+    return false
   }
   // 判断用户名或者用户ID是否为空，弹出授权窗口
   if (!userInfo.userId || !userInfo.username) {
@@ -117,6 +122,7 @@ async function authMain(instance, userInfo) {
     })
     return false
   }
+  instance.onShow()
   //这里可以调用首页需要的api并跳转到首页
   // wx.switchTab({
   //   url: '/pages/index/index',

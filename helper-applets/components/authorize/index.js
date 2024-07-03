@@ -55,13 +55,15 @@ Component({
               // 弹出手机号码授权窗口
               this.setData({
                 showAuth: "PhoneNumber",
-                type: true,
-                loading: false
+                type: true
               })
             } else {
               this.hide()
             }
           }
+          this.setData({
+            loading: false
+          })
         },
         fail(res) {
           console.error(res)

@@ -1,9 +1,11 @@
 import {
   HEADER,
   TOKENNAME,
-  CACHE_TOKEN,
   HTTP_REQUEST_URL,
+  CACHE_TOKEN
 } from './../config.js';
+
+const globalUtil = require('../utils/util.js')
 
 /*
   api：Stirng 接口URL
@@ -28,17 +30,28 @@ export default function request(api, method, data, {
       header: header,
       data: data || {},
       success: (res) => {
-      // 4014: Illegal token; 4018: Token expired;
-      if (res.code === 4014 || res.code === 4018 || res.code === 5006 || res.code === 5012) {
-          wx.removeStorageSync(CACHE_TOKEN)
+        if (res.statusCode === 200) {
+          // 4014: Illegal token; 4018: Token expired; 5006: Account logout; 5012: Other client login;
+          if (res.data.code === 4014 || res.data.code === 4018 || res.data.code === 5006 || res.data.code === 5012) {
+            globalUtil.removeCache() // 清除登录信息缓存
+            wx.showToast({
+              icon: "loading",
+              title: "登录凭证已失效",
+              complete: function() {
+                wx.redirectTo({
+                  url: '/pages/login/login'
+                })
+              }
+            })
+            console.warn(res.data)
+            reject(null);
+          }
+        } else {
+          console.error(res.data)
           wx.showToast({
-            type: "loading",
-            title: '登录凭证已失效，请重新登录。。。',
+            icon: "none",
+            title: "内部服务器异常"
           })
-          wx.switchTab({
-            url: '/pages/login/login',
-          })
-          reject(null);
         }
         reslove(res.data || null)
       },

@@ -6,6 +6,11 @@ import {
   CACHE_USERINFO
 } from "../../config.js"
 
+const globalUtil = require('../../utils/util.js')
+const {
+  logout
+} = require("../../api/user");
+
 CustomPage({
   data: {
     isLoggedIn: false,  // 用于区分是否登录
@@ -18,8 +23,9 @@ CustomPage({
     authType: 'UserInfo',
     showAuth: false
   },
-  onLoad: function () {
-    // 页面加载时检查登录状态
+  onLoad: function () { // 只会在页面加载时触发一次
+  },
+  onShow: function() { // 每次页面显示时都会被触发
     this.checkLoginStatus();
   },
   checkLoginStatus: function() {
@@ -64,21 +70,29 @@ CustomPage({
     console.log('程序缓存清除成功');
   },
   logout: function() {
-    console.log('进入用户推出逻辑流程...');
-    // 实际退出登录的处理逻辑，如清除缓存、重定向到登录页面等
     this.setData({
-      dialogShow: true,
+      dialogShow: true
     });
   },
-  tapDialogButton(e) {
-    console.log('退出选项结果: ', e);
-    this.setData({
-        dialogShow: false,
-        showOneButtonDialog: false,
-        isLoggedIn: false,
-        nickname: '未登录',
-        username: 'unknown',
-        avatarUrl: defaultAvatarUrl // 重置为默认头像
-    })
-  },
+  async tapDialogButton(e) {
+    // 实际退出登录的处理逻辑，如清除缓存、重定向到登录页面等
+    if (e.detail.index === 1) { // 点击确定
+      let logoutRes = await logout()
+      if (logoutRes && logoutRes.success) {
+        globalUtil.removeCache() // 退出登录，清除登录信息缓存
+        this.setData({
+          dialogShow: false,
+          showOneButtonDialog: false,
+          isLoggedIn: false,
+          nickname: '未登录',
+          username: 'unknown',
+          avatarUrl: defaultAvatarUrl // 重置为默认头像
+        })
+      }
+    } else { // 点击取消
+      this.setData({
+        dialogShow: false
+      })
+    }
+  }
 })

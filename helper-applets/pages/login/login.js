@@ -26,6 +26,14 @@ CustomPage({
     canIUseNicknameComp: wx.canIUse('input.type.nickname')
   },
   onLoad: function () {
+    const cacheUserInfo = wx.getStorageSync(CACHE_USERINFO)
+    if (cacheUserInfo) {
+      let userInfo = JSON.parse(cacheUserInfo)
+      this.setData({
+        hasUserInfo: true,
+        userInfo: userInfo
+      })
+    }
   },
   bindAuthLogin: function () {
     this.setData({
@@ -33,25 +41,31 @@ CustomPage({
     })
     wx.getUserProfile({
       desc: '用于完善用户信息',
-      success: (res) => {
-        console.log(res) // 微信授权用户信息日志打印
+      success: async (res) => {
+        // console.log(res) // 微信授权用户信息日志打印
         let loginParam = {
           avatar: res.userInfo.avatarUrl,
           nickname: res.userInfo.nickName
         }
         // 执行登录注册逻辑
-        authLogin(this, loginParam)
+        const authLoginRes = await authLogin(this, loginParam)
+        if (authLoginRes && this.data.authSuccess) {
+          //这里可以调用首页需要的api并跳转到首页
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
+          // 授权成功弹出登录成功提示
+          if (this.data.authSuccess) {
+            wx.showToast({
+              icon: "none",
+              title: '登录成功',
+              duration: 2000
+            })
+          }
+        }
         this.setData({
           loading: false
         })
-        // 授权成功弹出登录成功提示
-        if (this.data.authSuccess) {
-          wx.showToast({
-            icon: "none",
-            title: '登录成功',
-            duration: 2000
-          })
-        }
       }
     })
   }
