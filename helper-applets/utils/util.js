@@ -2,7 +2,9 @@ import {
   CACHE_TOKEN,
   CACHE_TOKEN_EXPIRED_INTERVAL,
   CACHE_TOKEN_TIME,
-  CACHE_USERINFO
+  CACHE_USERINFO,
+  CACHE_CODE,
+  CACHE_CODE_TIME
 } from './../config.js';
 
 const formatTime = date => {
@@ -26,6 +28,8 @@ const removeCache = () => {
   wx.removeStorageSync(CACHE_TOKEN_EXPIRED_INTERVAL)
   wx.removeStorageSync(CACHE_TOKEN_TIME)
   wx.removeStorageSync(CACHE_USERINFO)
+  wx.removeStorageSync(CACHE_CODE)
+  wx.removeStorageSync(CACHE_CODE_TIME)
 }
 
 module.exports = {
