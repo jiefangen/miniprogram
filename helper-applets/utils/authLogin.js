@@ -122,7 +122,6 @@ async function authMain(instance, userInfo) {
     })
     return false
   }
-  instance.onShow()
   //这里可以调用首页需要的api并跳转到首页
   // wx.switchTab({
   //   url: '/pages/index/index',

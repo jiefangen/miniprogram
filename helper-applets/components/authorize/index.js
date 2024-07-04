@@ -19,6 +19,11 @@ Component({
       type: Boolean,
       value: false
     },
+    // 登录成功后跳转的路径
+    path: {
+      type: String,
+      value: ""
+    }
   },
 
   data: {
@@ -37,7 +42,7 @@ Component({
       wx.getUserProfile({
         desc: '用于完善用户信息',
         success: async (res) => {
-          console.log(res)
+          // console.log(res)
           let loginParam = {
             avatar: res.userInfo.avatarUrl,
             nickname: res.userInfo.nickName,
@@ -59,6 +64,13 @@ Component({
               })
             } else {
               this.hide()
+            }
+            // 登录成功后，跳转并重新加载页面
+            let path = this.data.path
+            if (path) {
+              wx.reLaunch({
+                url: path
+              })
             }
           }
           this.setData({

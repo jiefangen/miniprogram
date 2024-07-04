@@ -21,7 +21,8 @@ CustomPage({
     buttons: [{ text: '取消' }, { text: '确定' }],
     // 判断微信授权弹窗
     authType: 'UserInfo',
-    showAuth: false
+    showAuth: false,
+    redirectToPath: '/pages/mine/mine'
   },
   onLoad: function () { // 只会在页面加载时触发一次
   },

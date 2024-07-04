@@ -59,7 +59,7 @@ CustomPage({
             wx.showToast({
               icon: "none",
               title: '登录成功',
-              duration: 2000
+              duration: 1000
             })
           }
         }

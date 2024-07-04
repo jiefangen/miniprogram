@@ -49,4 +49,4 @@
   <view>是否要退出登录？</view>
 </mp-dialog>
 
-<authorize type="{{authType}}" showAuth="{{showAuth}}" />
+<authorize type="{{authType}}" showAuth="{{showAuth}}" path="{{redirectToPath}}" />
