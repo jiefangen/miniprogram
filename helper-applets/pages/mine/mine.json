@@ -1,4 +1,5 @@
 {
+  "componentFramework": "glass-easel",
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
     "authorize": "/components/authorize/index",

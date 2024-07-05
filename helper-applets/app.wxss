@@ -4,7 +4,11 @@
 page {
   height: 100%;
 }
-
+@media (prefers-color-scheme: dark) {
+  page {
+      background-color: #1f1f1f;
+  }
+}
 navigator text,
 text text,
 text navigator {

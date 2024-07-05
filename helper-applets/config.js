@@ -1,7 +1,7 @@
 // "release" 正式版  "trial" 体验版 "develop" 开发版 
 const env = wx.getAccountInfoSync().miniProgram.envVersion
 
-const HTTP_REQUEST_URL = env === "release" ? "https://kite1874.com/api/" : env === "trial" ? "https://kite1874.com/test/api/" : "http://localhost:10003/helper-app"
+const HTTP_REQUEST_URL = env === "release" ? "https://kite1874.com/api/" : env === "trial" ? "https://kite1874.com/test/api/" : "http://192.168.3.9:10003/helper-app"
 
 module.exports = {
   //请求接口地址，根URL

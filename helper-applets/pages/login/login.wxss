@@ -23,7 +23,7 @@
 .bottom {
   border-radius: 80rpx;
   margin: 70rpx 50rpx;
-  font-size: 35rpx;
+  font-size: 33rpx;
 }
 .nickname {
   margin: 90rpx 0 90rpx 50rpx;

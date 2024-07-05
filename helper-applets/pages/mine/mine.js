@@ -53,11 +53,19 @@ CustomPage({
     });
   },
   navigateToSettings: function() {
+    wx.showToast({
+      icon: "loading",
+      title: '设置功能开发中'
+    })
     wx.navigateTo({
       url: '/pages/settings/settings'
-    });
+    })
   },
   navigateToHelp: function() {
+    wx.showToast({
+      icon: "loading",
+      title: '帮助反馈开发中'
+    })
     wx.navigateTo({
       url: '/pages/help/help'
     });
@@ -68,7 +76,11 @@ CustomPage({
     });
   },
   navigateToClearCache: function() {
-    console.log('程序缓存清除成功');
+    wx.showToast({
+      icon: "success",
+      title: '缓存清除成功',
+      duration: 1000
+    })
   },
   logout: function() {
     this.setData({
