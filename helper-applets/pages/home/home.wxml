@@ -1,4 +1,4 @@
-<view class="page" data-weui-theme="{{theme}}">
+<view class="page">
   <mp-navigation-bar back="{{true}}" title="Flex"></mp-navigation-bar>
   <scroll-view type="list" scroll-y class="page-scroll-view">
     <view class="page__bd page__bd_spacing">

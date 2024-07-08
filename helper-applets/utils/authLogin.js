@@ -97,6 +97,7 @@ async function loginMain(loginParam, code) {
     wx.setStorageSync(CACHE_USERINFO, JSON.stringify(loginRes.data))
     const globalData = getApp().globalData
     globalData.userInfo = loginRes.data || {}
+    globalData.hasLogin = true
     return loginRes
   }
   return {}

@@ -1,5 +1,3 @@
-import CustomPage from '../../utils/base/CustomPage'
-
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
 
 import {
@@ -10,7 +8,7 @@ import {
   authLogin
 } from "../../utils/authLogin.js"
 
-CustomPage({
+Page({
   data: {
     userProfile: {
       avatarUrl: defaultAvatarUrl,

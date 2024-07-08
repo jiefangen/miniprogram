@@ -1,5 +1,3 @@
-import CustomPage from '../../utils/base/CustomPage'
-
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
 
 import {
@@ -11,7 +9,7 @@ const {
   logout
 } = require("../../api/user");
 
-CustomPage({
+Page({
   data: {
     isLoggedIn: false,  // 用于区分是否登录
     nickname: '未登录',

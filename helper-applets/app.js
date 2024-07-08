@@ -7,7 +7,8 @@ App({
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    // TODO 初始化默认登录流程
+    // TODO 初始化默认登录流程，无需用户手动确认
+    
   },
   onShow: function () {
       console.log('App Show')
