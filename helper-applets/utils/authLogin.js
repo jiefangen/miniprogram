@@ -106,21 +106,25 @@ async function loginMain(loginParam, code) {
 async function authMain(instance, userInfo) {
   // 用户信息获取成功
   if (userInfo && userInfo.userId) {
-    instance.setData({
-      authSuccess: true,
-      hasUserInfo: true,
-      showAuth: false,
-      userInfo: userInfo
-    })
+    if (instance) {
+      instance.setData({
+        authSuccess: true,
+        hasUserInfo: true,
+        showAuth: false,
+        userInfo: userInfo
+      })
+    }
   } else {
     return false
   }
   // 判断用户名或者用户ID是否为空，弹出授权窗口
   if (!userInfo.userId || !userInfo.username) {
-    instance.setData({
-      authType: 'UserInfo',
-      showAuth: true
-    })
+    if (instance) {
+      instance.setData({
+        authType: 'UserInfo',
+        showAuth: true
+      })
+    }
     return false
   }
   //这里可以调用首页需要的api并跳转到首页
