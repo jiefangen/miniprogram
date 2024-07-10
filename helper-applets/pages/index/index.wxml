@@ -1,8 +1,6 @@
 <navigation-bar title="首页" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <text>欢迎来到首页，点击跳转页面</text>
-    <navigator url="/pages/home/home">主页页面</navigator>
     <navigator url="/pages/login/login">登录页面</navigator>
   </view>
 </scroll-view>

@@ -15,7 +15,7 @@ App({
     }
   },
   onShow: function () {
-      console.log('App Show')
+      console.log('App run env: ' + wx.getAccountInfoSync().miniProgram.envVersion)
   },
   onHide: function () {
       console.log('App Hide')

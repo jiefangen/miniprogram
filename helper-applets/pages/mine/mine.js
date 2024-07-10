@@ -53,7 +53,7 @@ Page({
   navigateToSettings: function() {
     wx.showToast({
       icon: "loading",
-      title: '设置功能开发中'
+      title: '敬请期待'
     })
     wx.navigateTo({
       url: '/pages/settings/settings'
@@ -62,7 +62,7 @@ Page({
   navigateToHelp: function() {
     wx.showToast({
       icon: "loading",
-      title: '帮助反馈开发中'
+      title: '敬请期待'
     })
     wx.navigateTo({
       url: '/pages/help/help'
